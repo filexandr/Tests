@@ -5,6 +5,12 @@ namespace Task40
 {
     public static class Task40
     {
+        // TODO apply comments
+        // задача 40 - это алгоритм Брензехема
+        // И если печатать в консоль, то неудобно делать юнит тесты.
+        // в этом весь смысл умение использовать моки
+        // 40 тестировать не надо
+
         // 40.Write a routine to draw a circle(x** 2 + y** 2 = r** 2) without making use of any floating point
         // computations at all.
         // Time: O(4(R + 1) * Sqrt(R))
