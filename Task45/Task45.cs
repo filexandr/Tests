@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Task45
 {
     // 45. Insert in a sorted list.
-    // Time: O(log N)
+    // Time: O(N * log N)
     // Space: O(log N)
     public static class Task45
     {
