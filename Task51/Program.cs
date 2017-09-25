@@ -3,16 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
-namespace Task40
+namespace Task51
 {
     class Program
     {
-        [STAThread]
         static void Main(string[] args)
         {
-            Application.Run(new frmMain());
         }
     }
 }
