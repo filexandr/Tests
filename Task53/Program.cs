@@ -10,6 +10,14 @@ namespace Task53
     {
         static void Main(string[] args)
         {
+            string[] colors = { "green", "brown", "blue", "red" };
+            string s = "e";
+            var query = colors.Where(c => c.Contains(s));
+            s = "n";
+            query = query.Where(c => c.Contains(s));
+
+            Console.WriteLine(query.Count());
+            Console.ReadLine();
         }
     }
 }
