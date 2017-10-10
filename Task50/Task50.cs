@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Task50
 {
@@ -37,23 +38,61 @@ namespace Task50
             return result;
         }
 
-        public static int Depth(BinaryTreeNode node)
+        #region Recursion
+
+        public static int DepthRecursion(BinaryTreeNode node)
         {
             int depth = 0;
             int steps = 0;
-            DepthVisit(node, ref steps, ref depth);
+            DepthRecursionVisit(node, ref steps, ref depth);
             return depth;
         }
 
-        private static void DepthVisit(BinaryTreeNode node, ref int steps, ref int depth)
+        private static void DepthRecursionVisit(BinaryTreeNode node, ref int steps, ref int depth)
         {
             if (node == null) return;
 
             steps++;
             depth = Math.Max(steps, depth);
-            DepthVisit(node.LeftNode, ref steps, ref depth);
-            DepthVisit(node.RightNode, ref steps, ref depth);
+            DepthRecursionVisit(node.LeftNode, ref steps, ref depth);
+            DepthRecursionVisit(node.RightNode, ref steps, ref depth);
             steps--;
         }
+
+        #endregion
+
+        #region Iterative
+
+        public static int DepthIterative(BinaryTreeNode node)
+        {
+            int depth = 0;
+
+            var stack = new Stack<Tuple<int, BinaryTreeNode>>();
+            var stackNode = node;
+            int? stackLevel = 1;
+
+            while (stackNode != null)
+            {
+                depth = Math.Max(stackLevel.Value, depth);
+
+                if (stackNode.LeftNode != null)
+                {
+                    stack.Push(new Tuple<int, BinaryTreeNode>(stackLevel.Value + 1, stackNode.LeftNode));
+                }
+
+                if (stackNode.RightNode != null)
+                {
+                    stack.Push(new Tuple<int, BinaryTreeNode>(stackLevel.Value + 1, stackNode.RightNode));
+                }
+
+                var stackObject = stack.Count > 0 ? stack.Pop() : null;
+                stackLevel = stackObject?.Item1;
+                stackNode = stackObject?.Item2;
+            }
+
+            return depth;
+        }
+
+        #endregion
     }
 }

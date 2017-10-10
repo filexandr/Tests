@@ -11,29 +11,40 @@ namespace Task49
     {
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void Null()
+        public void HeadNull()
         {
-            Task49.Delete(null, 0);
+            Task49.Delete(null, new Node());
         }
 
         [TestMethod]
-        [ExpectedException(typeof(IndexOutOfRangeException))]
-        public void OutOfRange()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void DeleteNull()
         {
-            Task49.Delete(new Node(), -1);
+            Task49.Delete(new Node(), null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void UnknownElement()
+        {
+            Task49.Delete(new Node(), new Node());
         }
 
         [TestMethod]
         public void Singe()
         {
-            Task49.Delete(new Node(), 0).Should().BeNull();
-            Task49.Delete(new Node(), 1).Should().BeNull();
+            var node = new Node();
+            Task49.Delete(node, node).Should().BeNull();
         }
 
         [TestMethod]
         public void Fisrt()
         {
-            var head = Task49.Delete(new Node {Value = 1, Next = new Node {Value = 2} }, 0);
+            var node1 = new Node {Value = 1};
+            var node2 = new Node { Value = 2 };
+            node1.Next = node2;
+
+            var head = Task49.Delete(node1, node1);
             head.Should().NotBeNull();
             head.Next.Should().BeNull();
             head.Previous.Should().BeNull();
@@ -43,7 +54,11 @@ namespace Task49
         [TestMethod]
         public void Last()
         {
-            var head = Task49.Delete(new Node {Value = 1, Next = new Node {Value = 2} }, 1);
+            var node1 = new Node { Value = 1 };
+            var node2 = new Node { Value = 2 };
+            node1.Next = node2;
+
+            var head = Task49.Delete(node1, node2);
             head.Should().NotBeNull();
             head.Next.Should().BeNull();
             head.Previous.Should().BeNull();
@@ -53,13 +68,17 @@ namespace Task49
         [TestMethod]
         public void Middle()
         {
-            var head = Task49.Delete(new Node {Value = 1, Next = new Node {Value = 2, Next = new Node {Value = 3} } }, 1);
+            var node1 = new Node { Value = 1 };
+            var node2 = new Node { Value = 2 };
+            var node3 = new Node { Value = 3 };
+            node1.Next = node2;
+            node2.Next = node3;
+
+            var head = Task49.Delete(node1, node2);
             head.Should().NotBeNull();
             head.Value.Should().Be(1);
-
             head.Next.Should().NotBeNull();
             head.Next.Value.Should().Be(3);
-
             head.Next.Next.Should().BeNull();
         }
     }

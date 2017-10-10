@@ -58,6 +58,25 @@ namespace Task47
             leftNode.Next = leftNode.Next?.Next;
         }
 
+        // Time: O(N)
+        // Space: O(1)
+        public void Delete(Node node)
+        {
+            if (Head == null)
+            {
+                throw new Exception("List is empty.");
+            }
+
+            if (Head == node)
+            {
+                Head = Head.Next;
+                return;
+            }
+
+            var leftNode = findLeftNode(node);
+            leftNode.Next = leftNode.Next?.Next;
+        }
+
         private Node findLeftAtIndex(int index)
         {
             if (index <= 0) throw new ArgumentException("Index must be positive.", nameof(index));
@@ -65,6 +84,19 @@ namespace Task47
             for (var i = 1; i < index; i++)
             {
                 if (node.Next == null) return node;
+                node = node.Next;
+            }
+
+            return node;
+        }
+
+        private Node findLeftNode(Node searchNode)
+        {
+            if (searchNode == null) throw new ArgumentNullException(nameof(searchNode));
+
+            var node = Head;
+            while (node.Next != null && node.Next != searchNode)
+            {
                 node = node.Next;
             }
 

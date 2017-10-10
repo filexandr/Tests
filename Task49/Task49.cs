@@ -7,16 +7,20 @@ namespace Task49
     // Space: O(1)
     public static class Task49
     {
-        public static Node Delete(Node head, int index)
+        public static Node Delete(Node head, Node toDelete)
         {
             if (head == null) throw new ArgumentNullException(nameof(head));
-            if (index < 0) throw new IndexOutOfRangeException("Index must be positive.");
+            if (toDelete == null) throw new ArgumentNullException(nameof(toDelete));
 
             var node = head;
-            for (int i = 0; i < index; i++)
+            while (node != null && node != toDelete)
             {
-                if (node.Next == null) break;
                 node = node.Next;
+            }
+
+            if (node == null)
+            {
+                throw new Exception("Node not found");
             }
 
             // last element
