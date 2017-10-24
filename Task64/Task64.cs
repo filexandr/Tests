@@ -5,7 +5,7 @@
     // Space: O(1)
     public static class Task64
     {
-        public static bool IsCycled(Node headNode)
+        public static bool IsСyclical(Node headNode)
         {
             if (headNode?.Next == null) return false;
 

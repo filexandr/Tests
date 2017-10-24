@@ -10,19 +10,19 @@ namespace Task64
         [TestMethod]
         public void Null()
         {
-            Task64.IsCycled(null).Should().BeFalse();
+            Task64.IsСyclical(null).Should().BeFalse();
         }
 
         [TestMethod]
         public void One()
         {
-            Task64.IsCycled(new Node(1)).Should().BeFalse();
+            Task64.IsСyclical(new Node(1)).Should().BeFalse();
         }
 
         [TestMethod]
         public void NotCycled()
         {
-            Task64.IsCycled(new Node(1).CreateNext(2).CreateNext(3)).Should().BeFalse();
+            Task64.IsСyclical(new Node(1).CreateNext(2).CreateNext(3)).Should().BeFalse();
         }
 
         [TestMethod]
@@ -30,7 +30,7 @@ namespace Task64
         {
             var headNode = new Node(1);
             headNode.CreateNext(2).CreateNext(3).Next = headNode;
-            Task64.IsCycled(headNode).Should().BeTrue();
+            Task64.IsСyclical(headNode).Should().BeTrue();
         }
 
         [TestMethod]
@@ -38,7 +38,7 @@ namespace Task64
         {
             var headNode = new Node(1);
             headNode.CreateNext(2).CreateNext(3).CreateNext(4).Next = headNode;
-            Task64.IsCycled(headNode).Should().BeTrue();
+            Task64.IsСyclical(headNode).Should().BeTrue();
         }
     }
 }
